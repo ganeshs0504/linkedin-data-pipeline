@@ -2,6 +2,7 @@
 .env
 /scripts
 __pycache__/
+logs/
 
 # Local .terraform directories
 **/.terraform/*
