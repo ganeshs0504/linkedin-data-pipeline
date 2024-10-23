@@ -1,5 +1,7 @@
 /keys
 .env
+/scripts
+__pycache__/
 
 # Local .terraform directories
 **/.terraform/*
