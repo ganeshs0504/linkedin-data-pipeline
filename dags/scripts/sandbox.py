@@ -4,13 +4,12 @@ import subprocess
 import logging
 import pandas as pd
 
-log = logging.getLogger("airflow")
-log.setLevel(logging.INFO)
-log.info("Yes, you will see this log :)")
-
 from airflow.models import Connection
 from airflow.hooks.base_hook import BaseHook
+from airflow.providers.google.cloud.hooks.gcs import GCSHook
 import json
+
+from google.cloud import storage
 
 
 def download_and_extract_raw_data_callable():
@@ -37,5 +36,19 @@ def print_loaded_csv_callable():
     downloaded_data_path = 'raw_data/downloaded_data/output.csv'
     temp = pd.read_csv(downloaded_data_path)
     print(temp.head(5))
+
+
+def check_if_file_exists_in_gcs():
+    name = 'downloaded_data/output.csv'
+    storage_client = storage.Client.from_service_account_json('/keys/gcp_creds.json')
+    bucket_name = 'test_bucket_airflow_99'
+    bucket = storage_client.bucket(bucket_name)
+    stats = storage.Blob(bucket=bucket, name=name).exists(storage_client)
+    logging.info("~~~~~~FILE EXISTS?~~~~~~~~~~~~~~~~~~~~~~~~")
+    logging.info(stats)
+    if stats:
+        return 'bash_placeholder'
+    else:
+        return 'upload_file_to_gcs'
 
 
