@@ -13,7 +13,54 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "linkedin-data-bucket" {
-  name          = "gcs-linkedin-pipeline-data-bucket"
+  name          = "gcs-linkedin-data-bucket"
   location      = "EU"
   force_destroy = true
+}
+resource "google_storage_bucket" "dataproc_staging_bucket" {
+  name     = "dataproc-staging-bucket-gcs-linkedin-pipeline"
+  location = "EU"
+  force_destroy = true
+}
+resource "google_storage_bucket" "dataproc_temp_bucket" {
+  name     = "dataproc-temp-bucket-gcs-linkedin-pipeline"
+  location = "EU"
+  force_destroy = true
+}
+
+resource "google_storage_bucket" "dataproc_jobs" {
+  name = "gcs-linkedin-dataproc-jobs"
+  location = "EU"
+  force_destroy = true
+}
+
+resource "google_dataproc_cluster" "dataproc_cluster" {
+  name   = "dataproc-cluster"
+  region = "europe-west2"
+
+  cluster_config {
+    staging_bucket = google_storage_bucket.dataproc_staging_bucket.name
+    temp_bucket = google_storage_bucket.dataproc_temp_bucket.name
+    master_config {
+      num_instances = 1
+      machine_type  = "e2-standard-4"
+      disk_config {
+        boot_disk_size_gb = 200
+      }
+    }
+
+    worker_config {
+      num_instances = 0
+    }
+
+    gce_cluster_config {
+      internal_ip_only = false
+    }
+    software_config {
+      image_version = "2.0.35-debian10"
+      override_properties = {
+        "dataproc:dataproc.allow.zero.workers" = "true"
+      }
+    }
+  }
 }
