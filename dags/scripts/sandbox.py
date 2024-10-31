@@ -35,7 +35,7 @@ def download_and_extract_raw_data_callable():
 def check_if_file_exists_in_gcs():
     name = 'downloaded_data/job_skills.csv'
     storage_client = storage.Client.from_service_account_json('/keys/gcp_creds.json')
-    bucket_name = 'linkedin-data-bucket'
+    bucket_name = 'gcs-linkedin-data-bucket'
     bucket = storage_client.bucket(bucket_name)
     stats = storage.Blob(bucket=bucket, name=name).exists(storage_client)
     logging.info("~~~~~~FILE EXISTS?~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -68,7 +68,7 @@ def upload_folder_to_gcs(**kwargs):
     bucket_name = "gcs-linkedin-data-bucket"
     gcs_conn_id = "gcp_creds"
 
-    csv_files = [file for file in os.listdir(data_folder) if file.endswith('.csv')]
+    csv_files = [file for file in os.listdir(data_folder) if file.endswith('.csv') and file != 'job_summary.csv']
 
     for csv_file in csv_files:
         local_file_path = os.path.join(data_folder, csv_file)
