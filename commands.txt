@@ -1,2 +1,6 @@
 docker build . --tag extending_airflow:latest
 docker-compose up -d --no-deps --build
+
+export GOOGLE_APPLICATION_CREDENTIALS='keys/gcs-linkedin-pipeline-key.json'
+
+export AIRFLOW__CORE__KILLED_TASK_CLEANUP_TIME=604800
