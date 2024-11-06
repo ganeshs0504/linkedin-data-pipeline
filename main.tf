@@ -12,11 +12,11 @@ provider "google" {
   region  = "europe-west2"
 }
 
-# resource "google_storage_bucket" "linkedin-data-bucket" {
-#   name          = "gcs-linkedin-data-bucket"
-#   location      = "EU"
-#   force_destroy = true
-# }
+resource "google_storage_bucket" "linkedin-data-bucket" {
+  name          = "gcs-linkedin-data-bucket"
+  location      = "EU"
+  force_destroy = true
+}
 resource "google_storage_bucket" "dataproc_staging_bucket" {
   name          = "dataproc-staging-bucket-gcs-linkedin-pipeline"
   location      = "EU"
@@ -66,9 +66,9 @@ resource "google_dataproc_cluster" "dataproc_cluster" {
   }
 }
 
-# resource "google_bigquery_dataset" "linkedin_bq_dataset" {
-#   dataset_id  = "linkedin_bq_dataset"
-#   description = "Default dataset for the linkedin data pipeline project"
-#   location    = "EU"
-#   delete_contents_on_destroy = true
-# }
+resource "google_bigquery_dataset" "linkedin_bq_dataset" {
+  dataset_id  = "linkedin_bq_dataset"
+  description = "Default dataset for the linkedin data pipeline project"
+  location    = "EU"
+  delete_contents_on_destroy = true
+}
