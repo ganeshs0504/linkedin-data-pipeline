@@ -1,0 +1,19 @@
+{
+    "linkedin_data_bucket_name": "gcs-linkedin-data-bucket",
+    "dataproc_staging_bucket_name": "dataproc-staging-bucket-gcs-linkedin-pipeline",
+    "dataproc_temp_bucket_name": "dataproc-temp-bucket-gcs-linkedin-pipeline",
+    "dataproc_jobs_bucket_name": "gcs-linkedin-dataproc-jobs",
+    "dataproc_cluster_name": "dataproc-cluster",
+    "bigquery_dataset_id": "linkedin_bq_dataset",
+    "project_id": "gcs-linkedin-pipeline",
+    "region": "europe-west2",
+    "location": "EU",
+    "credentials": "./keys/gcs-linkedin-pipeline-key.json",
+    "airflow_gcp_conn_id": "gcp_creds",
+    "kaggle_dataset_id": "asaniczka/1-3m-linkedin-jobs-and-skills-2024",
+    "kaggle_dataset_name": "1-3m-linkedin-jobs-and-skills-2024",
+    "local_dataset_download_path": "raw_data/downloaded_data",
+    "gcs_raw_data_uri": "gs://gcs-linkedin-data-bucket/downloaded_data/",
+    "gcs_processed_data_uri": "gs://gcs-linkedin-data-bucket/processed_data/"
+  }
+  

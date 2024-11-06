@@ -8,35 +8,36 @@ terraform {
 }
 
 provider "google" {
-  project = "gcs-linkedin-pipeline"
-  region  = "europe-west2"
+  credentials = file(local.config["credentials"])
+  project     = local.config["project_id"]
+  region      = local.config["region"]
 }
 
 resource "google_storage_bucket" "linkedin-data-bucket" {
-  name          = "gcs-linkedin-data-bucket"
-  location      = "EU"
+  name          = local.config["linkedin_data_bucket_name"]
+  location      = local.config["location"]
   force_destroy = true
 }
 resource "google_storage_bucket" "dataproc_staging_bucket" {
-  name          = "dataproc-staging-bucket-gcs-linkedin-pipeline"
-  location      = "EU"
+  name          = local.config["dataproc_staging_bucket_name"]
+  location      = local.config["location"]
   force_destroy = true
 }
 resource "google_storage_bucket" "dataproc_temp_bucket" {
-  name          = "dataproc-temp-bucket-gcs-linkedin-pipeline"
-  location      = "EU"
+  name          = local.config["dataproc_temp_bucket_name"]
+  location      = local.config["location"]
   force_destroy = true
 }
 
 resource "google_storage_bucket" "dataproc_jobs" {
-  name          = "gcs-linkedin-dataproc-jobs"
-  location      = "EU"
+  name          = local.config["dataproc_jobs_bucket_name"]
+  location      = local.config["location"]
   force_destroy = true
 }
 
 resource "google_dataproc_cluster" "dataproc_cluster" {
-  name   = "dataproc-cluster"
-  region = "europe-west2"
+  name   = local.config["dataproc_cluster_name"]
+  region = local.config["region"]
 
   cluster_config {
     staging_bucket = google_storage_bucket.dataproc_staging_bucket.name
@@ -67,8 +68,8 @@ resource "google_dataproc_cluster" "dataproc_cluster" {
 }
 
 resource "google_bigquery_dataset" "linkedin_bq_dataset" {
-  dataset_id  = "linkedin_bq_dataset"
-  description = "Default dataset for the linkedin data pipeline project"
-  location    = "EU"
+  dataset_id                 = local.config["bigquery_dataset_id"]
+  description                = "Default dataset for the linkedin data pipeline project"
+  location                   = local.config["location"]
   delete_contents_on_destroy = true
 }
