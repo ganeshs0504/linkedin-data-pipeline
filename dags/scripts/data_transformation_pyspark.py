@@ -9,6 +9,9 @@ spark = SparkSession.builder \
 
 spark.conf.set('temporaryGcsBucket', 'dataproc-temp-bucket-gcs-linkedin-pipeline')
 
+# Configuration to store array type in bigquery
+spark.conf.set("spark.datasource.bigquery.intermediateFormat", "orc")
+
 skills_data_path = "gs://gcs-linkedin-data-bucket/processed_data/skills.parquet"
 postings_data_path = "gs://gcs-linkedin-data-bucket/processed_data/jobs.parquet"
 
@@ -16,8 +19,9 @@ skills_df = spark.read.parquet(skills_data_path)
 jobs_df = spark.read.parquet(postings_data_path)
 
 skills_as_list_df = skills_df.withColumn("skills_list", split(col("skills_list"), ","))
-skills_exploded = skills_as_list_df.withColumn("skills_list", explode(col("skills_list")))
-skills_dim = skills_exploded.select("job_link", "skills_list")
+# skills_exploded = skills_as_list_df.withColumn("skills_list", explode(col("skills_list")))
+# skills_dim = skills_exploded.select("job_link", "skills_list")
+skills_dim = skills_as_list_df.select("job_link", "skills_list")
 
 location_dim = jobs_df.select("default_job_location", "city", "country").distinct()
 location_dim = location_dim.withColumn("location_id", monotonically_increasing_id())

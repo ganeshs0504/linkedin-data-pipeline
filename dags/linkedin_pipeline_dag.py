@@ -17,7 +17,7 @@ default_args = {
 }
 
 with DAG(
-    dag_id='linkedin_datapipeline_dag',
+    dag_id='linkedin_datapipeline_dag_skill_arr',
     default_args=default_args,
     description='Something to say about this dag',
     # start_date=datetime(2024, 10, 22),
