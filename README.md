@@ -24,7 +24,9 @@ Throughout the entire process, automation and orchestration are achieved using *
 ![Airflow_DAG](project_resources/airflow_dag.png)
 
 ## Data Model
-![Data Model](project_resources/data_model.png)
+<p align="center">
+  <img src="project_resources/data_model.png" alt="Data Model">
+</p>
 
 ## Results
 **WIP**
