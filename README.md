@@ -1,7 +1,5 @@
 # Linkedin Data Pipeline
 
-![Linkedin_logo](project_resources/linkedin_banner.jpg)
-
 ## Project Overview
 ![Pipeline Architecture](project_resources/arch_diagram.png)
 
@@ -24,6 +22,9 @@ Throughout the entire process, automation and orchestration are achieved using *
 
 ## Airflow DAG
 ![Airflow_DAG](project_resources/airflow_dag.png)
+
+## Data Model
+![Data Model](project_resources/data_model.png)
 
 ## Results
 **WIP**
