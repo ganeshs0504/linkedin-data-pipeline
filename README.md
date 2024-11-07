@@ -1,6 +1,6 @@
 # Linkedin Data Pipeline
 
-![Linkedin_logo](project_resources/linkedin_banner.jpeg)
+![Linkedin_logo](project_resources/linkedin_banner.jpg)
 
 ## Project Overview
 ![Pipeline Architecture](project_resources/arch_diagram.png)
