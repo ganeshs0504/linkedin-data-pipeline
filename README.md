@@ -29,7 +29,9 @@ Throughout the entire process, automation and orchestration are achieved using *
 </p>
 
 ## Results
-**WIP**
+<p align="center">
+  <img src="project_resources/dashboard.png" alt="Dashboard">
+</p>
 
 ## Steps to Recreate the Project
 1. Clone the repo.
