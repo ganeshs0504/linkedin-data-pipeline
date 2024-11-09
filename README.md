@@ -33,6 +33,8 @@ Throughout the entire process, automation and orchestration are achieved using *
   <img src="project_resources/dashboard.png" alt="Dashboard">
 </p>
 
+[Link to Dashboard](https://lookerstudio.google.com/reporting/7083fdbb-1b8a-47fd-a745-6d7859eddd56)
+
 ## Steps to Recreate the Project
 1. Clone the repo.
 2. Place both the Kaggle API credentials and Google Cloud Platform (GCP) credentials as JSON files inside a `keys` folder at the root of the project directory and ensure that these keys are added to the airflow connections as follows:
